@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="style.css">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Handleliste</title>
+    <script src="index.js"></script>
 </head>
 <body>
-
+<div class="container">
+    <div class="todo-app">
+        <h2>To-Do List <img src="images/icon.png"></h2>
+        <div class="row">
+            <input type="text" id="input-box" placeholder="Add your text">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="list-container"> </ul>
+    </div>
+</div>
 </body>
 </html>
