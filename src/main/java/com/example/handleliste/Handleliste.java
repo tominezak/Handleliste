@@ -9,6 +9,10 @@ public class Handleliste {
         this.navn = navn;
     }
 
+    public Handleliste(){
+
+    }
+
     public int getId() {
         return id;
     }
