@@ -1,19 +1,12 @@
 package com.example.handleliste;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import java.io.IOException;
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -24,43 +17,52 @@ public class HandlelisteController {
 
     private Logger logger = LoggerFactory.getLogger(HandlelisteController.class);
 
-    //Lagre et nytt produkt i handlelisten
-    @PostMapping("/lagreProdukt")
-    public boolean lagreProdukt(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String sql = "INSERT INTO handleliste (navn) VALUES(?)";
+    @PostMapping("/lagreHandleliste")
+    public String lagreHandleliste(Handleliste handleliste) {
+        String regexpVare = "^[A-Za-z0-9\s]{1,50}$";
 
-        String produktNavn = request.getParameter("navn"); // Henter parameter fra forespørselen
-        String regexpProdukt = "^[a-zA-Z0-9\\s]{1,50}$"; // Valideringsmønster
+        boolean ok = handleliste.getVare().matches(regexpVare);
 
-        // Validering av input
-        boolean navnOK = produktNavn != null && produktNavn.matches(regexpProdukt);
-
-        if (navnOK) {
+        if (ok) {
             try {
-                db.update(sql, produktNavn);
-                return true; // Returnerer true hvis alt er OK
+                String sql = "INSERT INTO handleliste (vare, ok) VALUES (?, ?)";
+                db.update(sql, handleliste.getVare(), handleliste.isOk());
+                return "Vare er lagret";
             } catch (Exception e) {
-                response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Feil ved lagring i databasen.");
-                return false; // Returnerer false ved databasefeil
+                logger.error("Feil i insetting av ny vare: " + e);
+                return "Feil ved lagring av vare";
             }
-        } else {
-            response.sendError(HttpStatus.BAD_REQUEST.value(), "Feil i input: Produktnavn må bestå av bokstaver, tall og mellomrom.");
-            return false; // Returnerer false hvis input ikke valideres
         }
+        return "Feil i inputvalidering";
     }
 
     @GetMapping("/hentHandleliste")
-    public List<Handleliste> hentHandleliste(HttpServletResponse response) throws IOException {
-        List<Handleliste> produkter = new ArrayList<>();
+    public List<Handleliste> hentHandleliste() {
         String sql = "SELECT * FROM handleliste";
+        return db.query(sql, new BeanPropertyRowMapper<>(Handleliste.class));
+    }
 
+    @PostMapping("/oppdaterHandleliste")
+    public String oppdaterHandleliste(Handleliste handleliste) {
         try {
-            produkter = db.query(sql, new BeanPropertyRowMapper<>(Handleliste.class));
-            return produkter;
+            String sql = "UPDATE handleliste SET ok = ? WHERE id = ?";
+            db.update(sql, handleliste.isOk(), handleliste.getId());
+            return "Handleliste oppdatert";
         } catch (Exception e) {
-            logger.error("Feil i database: " + e);
-            response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Feil i database - prøv igjen senere");
+            logger.error("Feil ved oppdatering av vare: " + e);
+            return "Feil ved oppdatering av vare";
         }
-        return produkter; // Returnerer tom liste hvis en feil oppstår
+    }
+
+    @PostMapping("/slettHandleliste")
+    public String slettHandleliste(int id) {
+        try {
+            String sql = "DELETE FROM handleliste WHERE id = ?";
+            db.update(sql, id);
+            return "Vare slettet";
+        } catch (Exception e) {
+            logger.error("Feil ved sletting av vare: " + e);
+            return "Feil ved sletting av vare";
+        }
     }
 }

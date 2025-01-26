@@ -1,0 +1,6 @@
+CREATE TABLE handleliste (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    vare VARCHAR(50) NOT NULL,
+    ok BOOLEAN DEFAULT FALSE
+);
+

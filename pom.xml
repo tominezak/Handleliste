@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>oslomet.webprog</groupId>
-    <artifactId>KonteEks2020</artifactId>
+    <artifactId>Handleliste</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>KonteEks2020</name>
     <description>KonteEks2020</description>

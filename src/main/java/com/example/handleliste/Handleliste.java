@@ -1,16 +1,17 @@
 package com.example.handleliste;
 
 public class Handleliste {
-        private int id;
-        private String navn;
+    private int id;
+    private String vare;
+    private boolean ok;
 
-    public Handleliste(int id, String navn) {
+    public Handleliste(int id, String vare, boolean ok) {
         this.id = id;
-        this.navn = navn;
+        this.vare = vare;
+        this.ok = ok;
     }
 
     public Handleliste(){
-
     }
 
     public int getId() {
@@ -21,11 +22,20 @@ public class Handleliste {
         this.id = id;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getVare() {
+        return vare;
     }
 
-    public void setNavn(String navn) {
-        this.navn = navn;
+    public void setVare(String vare) {
+        this.vare = vare;
+    }
+
+    public boolean isOk() {
+        return ok;
+    }
+
+    public void setOk(boolean ok) {
+        this.ok = ok;
     }
 }
+
