@@ -11,6 +11,7 @@ public class Handleliste {
         this.ok = ok;
     }
 
+    //Tom konstruktør
     public Handleliste(){
     }
 

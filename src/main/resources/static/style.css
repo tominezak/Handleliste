@@ -1,15 +1,21 @@
+/*Fjerner standardmargin og padding, samt setter høyden til å fylle hele skjermen*/
 body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+
+    /*Standard font-familie*/
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+    /*Bakgrunnsbilde*/
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
     url('https://images.unsplash.com/photo-1515706886582-54c73c5eaf41?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+/*Container for å sentrere innhold*/
 .page-container {
     min-height: 100vh;
     display: flex;
@@ -18,6 +24,7 @@ body {
     padding: 2rem;
 }
 
+/*Wrapper for innhold med en semi-transparent bakgrunn og skyggeeffekter*/
 .content-wrapper {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -28,6 +35,7 @@ body {
     padding: 2rem;
 }
 
+/*Styling av overskriften*/
 .title {
     color: #1a1a1a;
     font-size: 2rem;
@@ -36,6 +44,7 @@ body {
     text-align: left;
 }
 
+/*Container og styling av input-felt og legg-til-knapp*/
 .input-container {
     display: flex;
     gap: 0.5rem;
@@ -52,12 +61,14 @@ body {
     background: rgba(255, 255, 255, 0.9);
 }
 
+/*Effekter når innput-feltet er fokusert*/
 .input-field:focus {
     outline: none;
     border-color: #667eea;
     background: white;
 }
 
+/* Styling av legg-til-knappen */
 .add-button {
     background: #667eea;
     color: white;
@@ -69,10 +80,12 @@ body {
     transition: background-color 0.2s;
 }
 
+/*Effekt når man hovrer over knappen*/
 .add-button:hover {
     background: #5a6fd6;
 }
 
+/*Styling av elementer i handlelisten*/
 .shopping-list {
     list-style: none;
     padding: 0;
@@ -90,6 +103,7 @@ body {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
+/*Visuell effekt når et element i handlelisten hovres over*/
 .shopping-list li:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -102,6 +116,7 @@ body {
     gap: 1rem;
 }
 
+/*Styling av checkbox*/
 .checkbox {
     width: 20px;
     height: 20px;
@@ -109,11 +124,13 @@ body {
     border-radius: 4px;
 }
 
+/*Utrkrysser varen dersom markert ferdig*/
 .completed {
     text-decoration: line-through;
     color: #94a3b8;
 }
 
+/*Styling av slett-knappen*/
 .delete-btn {
     background: #ef4444;
     color: white;
@@ -129,6 +146,7 @@ body {
     background: #dc2626;
 }
 
+/*Styling av feilmeldinger*/
 .error-message {
     color: #ef4444;
     font-size: 0.875rem;

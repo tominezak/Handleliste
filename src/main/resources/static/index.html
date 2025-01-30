@@ -4,22 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Handleliste</title>
+
+    <!-- Lenker til eksterne CSS-biblioteker (Bootstrap for styling) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+
+    <!-- Importerer jQuery og Bootstrap JS for interaktivitet -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="index.js"></script>
 </head>
 <body>
+<!--Container for hovedinnhold-->
 <div class="page-container">
     <div class="content-wrapper">
         <h1 class="title">Handleliste 📝</h1>
+
+        <!--Input-felt for å legge til varer i handleliste-->
         <div class="input-container">
             <input type="text" id="vare" class="input-field" placeholder="Legg til en vare..." onchange="validerVare()">
             <button class="add-button" onclick="leggTilVare()">Legg til</button>
         </div>
+
+        <!--Felt til feilmeldinger-->
         <div id="feilVare" class="error-message"></div>
         <div id="feil" class="error-message"></div>
+
+        <!--Visningsfelt for handlelisten-->
         <ul id="utskrift" class="shopping-list"></ul>
     </div>
 </div>
