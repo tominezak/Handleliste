@@ -1,8 +1,8 @@
 function validerVare() {
     //Henter verdien fra input-feltet
     const vare = $("#vare").val();
-    //1-50 tegn, kun bokstaver, tall og mellomrom
-    const regexp = /^[A-Za-z0-9\s]{1,50}$/;
+    //1-50 tegn, kun bokstaver, tall, bindestrek og mellomrom
+    const regexp = /^[A-Za-z0-9æøåÆØÅ\s-]{1,50}$/;
 
     //Sjekker om input verdien matcher regexp
     if (regexp.test(vare)) {
