@@ -23,7 +23,7 @@ public class HandlelisteController {
     //Metode for å lagre ny vare i handleliste
     @PostMapping("/lagreHandleliste")
     public String lagreHandleliste(Handleliste handleliste) {
-        String regexpVare = "^[A-Za-z0-9\s]{1,50}$"; //Kun bokstaver, tall og mellomrom + maks 50 tegn
+        String regexpVare = "^[A-Za-z0-9æøåÆØÅ\\s-]{1,50}$"; //Kun bokstaver, tall, bindestrek og mellomrom + maks 50 tegn
 
         boolean ok = handleliste.getVare().matches(regexpVare);
 
@@ -75,6 +75,18 @@ public class HandlelisteController {
         } catch (Exception e) {
             logger.error("Feil ved sletting av vare: " + e);
             return "Feil ved sletting av vare";
+        }
+    }
+
+    @PostMapping("/slettHele")
+    public String slettHele() {
+        try {
+            String sql = "DELETE FROM handleliste";
+            db.update(sql);
+            return "Hele listen er slettet";
+        } catch (Exception e) {
+            logger.error("Feil ved sletting av hele handleliste: " + e);
+            return "Feil ved sletting av hele handleliste";
         }
     }
 }
