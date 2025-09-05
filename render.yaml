@@ -1,0 +1,20 @@
+# render.yaml
+services:
+  - type: web
+    name: springboot-app
+    runtime: docker
+    repo: https://github.com/<bruker>/<repo>   # valgfritt; Render setter selv når du velger repo i UI
+    branch: main                               # eller den branchen du deployer fra
+    plan: free
+    autoDeploy: true
+
+    # Docker-innstillinger
+    dockerfilePath: ./Dockerfile               # <- peker eksplisitt på Dockerfile i repo-root
+
+    # Health check (valgfritt – hvis du har Actuator)
+    healthCheckPath: /actuator/health
+
+    envVars:
+      - key: PORT
+        value: 8080
+      # legg til dine egne som DB_URL, DB_USER, DB_PASS, osv.
