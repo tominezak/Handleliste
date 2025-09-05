@@ -85,9 +85,19 @@ function slettVare(id) {
     });
 }
 
+function slettHele(){
+    $.post("/slettHele", function (){
+        hentHandleliste();
+    }).fail(function (jqXHR){
+        $("#feil").html(jqXHR.responseText);
+    });
+
+}
+
 //Utføres når dokumentet er ferdig lastet
 $(function () {
-    hentHandleliste();
+    //hentHandleliste();
+    slettHele();
     //Sjekker om brukeren trykker "Enter" (keycode 13)
     $("#vare").keypress(function(e) {
         if (e.which == 13) {
